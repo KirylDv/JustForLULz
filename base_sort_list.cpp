@@ -38,6 +38,30 @@ class doubList{
 			}
 		}
 		
+		void Del(int num)
+		{
+			try{
+				node<T> *iter;
+				iter = Head;
+				for(int i = 0; i < num; i++)
+					if(iter->nextEl) 
+						iter = iter->nextEl;
+					else
+						throw 5;
+				if(iter->nextEl != NULL){
+					(iter->nextEl)->prvEl = iter->prvEl;
+					(iter->prvEl)->nextEl = iter->nextEl;	
+				}
+				if(iter == Tail) Tail = iter->prvEl;
+				if(iter == Head) Head = iter->nextEl;
+				delete iter;
+			}
+			catch(int x){
+				cout << "No element at this number\n";
+			}
+
+		}
+		
 		void operator[](int x)
 		{
 			node<T> *iter;
@@ -145,6 +169,7 @@ int main(){
 	dList_init(A, 20);
 	cout << another_system(16, 3) << '\n';
 	A[2];
+	A.Del(10);
 	A[-2];
 	int arr_size = 20;
 	int * a = new int[arr_size];
